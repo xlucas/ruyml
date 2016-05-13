@@ -22,6 +22,18 @@ class Item
     end
   end
 
+  def method_missing(name, *args, &block)
+    method = name.to_s
+    if method =~ /.+!$/ && self.respond_to?(method.chop)
+      method.chop!
+    end
+    if @hash.respond_to?(method)
+      @hash.send(method, *args, &block)
+    else
+      raise NameError, "Undefined property or method '#{name}'"
+    end
+  end
+
   def render(template, output)
     result = ERB.new(File.read(template), 0, '-').result(binding)
     if !output.nil?
