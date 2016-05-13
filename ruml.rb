@@ -23,7 +23,7 @@ class Item
   end
 
   def render(template, output)
-    result = ERB.new(File.read(template)).result(binding)
+    result = ERB.new(File.read(template), 0, '-').result(binding)
     if !output.nil?
       File.open(output, "w") do |file|
         file.write(result)
