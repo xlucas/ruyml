@@ -4,29 +4,47 @@ Ruby templating using YAML datasources
 
 ## Usage
 
-Given a yaml file :
+```
+Usage : ruml [options]
+
+Mandatory options:
+    -d, --datasources DATASOURCES
+    -t, --template TEMPLATE
+
+Optional options:
+    -o, --output FILE
+```
+
+## Example
+
+Given two yaml files :
 
 ```yaml
-foo:
-  bar: 'hello world !'
+object1:
+  propertie: foo
+```
+
+```yaml
+object2:
+  propertie: bar
 ```
 
 And an erb file :
 
 ```erb
-message = "<%= foo.bar.capitalize %>"
+message = "<%= object1.propertie.capitalize %> <%= object2.propertie.capitalize %>"
 ```
 
 Running :
 
 ```bash
-ruby ruml.rb datasource.yaml template.erb
+ruby ruml.rb -d file1.yaml,file2.yaml -t template.erb -o result
 ```
 
 Gives the following output :
 
 ```
-message = "Hello world !"
+message = "Foo Bar"
 ```
 
 ## Status
