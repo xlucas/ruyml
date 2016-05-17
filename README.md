@@ -78,7 +78,3 @@ Object attributes:
   <% end -%>
 <% end -%>
 ```
-
-# Status
-
-Alot of todos in there ... but you can feel the spirit.
