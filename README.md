@@ -4,16 +4,18 @@ Ruby templating using YAML datasources
 
 # Usage
 
-```
-Usage : ruyml [options]
+## Library
 
-Mandatory options:
-    -d, --datasources DATASOURCES
-    -t, --template TEMPLATE
+```ruby
+  require 'ruyml'
+  require 'yaml'
 
-Optional options:
-    -o, --output FILE
+  content = YAML.load(File.read("file.yml"))
+  r = Ruyml::Data.new(content)
+  r.render("template.erb", "output.txt")
 ```
+
+## CLI
 
 ## Simple usage
 
@@ -33,7 +35,7 @@ message = "<%= alert.message.capitalize %>"
 Running :
 
 ```bash
-ruby ruyml.rb -d alert.yaml -t template.erb
+ruyml -d alert.yaml -t template.erb
 ```
 
 Gives the following output :
@@ -42,15 +44,15 @@ Gives the following output :
 message = "Hello world !"
 ```
 
-### Advanced usage
-#### Multiple data sources
+## Advanced usage
+### Multiple data sources
 You can refer to multiple YAML datasources in a template and render it using :
 
 ```bash
 ruyml -d data1.yaml,data2.yaml -t template.erb
 ```
 
-#### Accessing Hash methods
+### Accessing Hash methods
 When iterating over an item which is not a leaf of the YAML file, you can access
 methods of the Hash class directly. In case a propertie has the same name than
 the method you are trying to use, simply use the `<method>!` form.
@@ -59,27 +61,24 @@ For instance :
 
 ```yaml
 object:
-  each: value
+  each:
+    - attr1: val1
+    - attr2: val2
+    - attr3: val3
 ```
 
 ```erb
-Each object will have <%= object.each %>.
+Object dump :
+<%= object.each %>
 
-Full object properties:
-<% object.each! do |k, v| -%>
-  <%= k %> : <%= v %>
+Object attributes:
+<% object.each! do |p, items| -%>
+  <% items.each do |attr, val| -%>
+    Attribute <%= attr %> has value <%= val %>
+  <% end -%>
 <% end -%>
 ```
 
-Once rendered, the result is :
-
-```
-Each object will have value.
-
-Full object properties:
-  each : value
-```
-
-## Status
+# Status
 
 Alot of todos in there ... but you can feel the spirit.
