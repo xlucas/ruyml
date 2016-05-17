@@ -1,11 +1,11 @@
-# RUML
+# RUYML
 
 Ruby templating using YAML datasources
 
 # Usage
 
 ```
-Usage : ruml [options]
+Usage : ruyml [options]
 
 Mandatory options:
     -d, --datasources DATASOURCES
@@ -33,7 +33,7 @@ message = "<%= alert.message.capitalize %>"
 Running :
 
 ```bash
-ruby ruml.rb -d alert.yaml -t template.erb
+ruby ruyml.rb -d alert.yaml -t template.erb
 ```
 
 Gives the following output :
@@ -47,7 +47,7 @@ message = "Hello world !"
 You can refer to multiple YAML datasources in a template and render it using :
 
 ```bash
-ruml -d data1.yaml,data2.yaml -t template.erb
+ruyml -d data1.yaml,data2.yaml -t template.erb
 ```
 
 #### Accessing Hash methods
