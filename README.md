@@ -1,3 +1,7 @@
+[![Gem Version](https://badge.fury.io/rb/ruyml.svg)](https://badge.fury.io/rb/ruyml)
+[![Documentation](http://img.shields.io/badge/docs-rdoc.info-blue.svg)](http://www.rubydoc.info/gems/ruyml)
+[![License](http://img.shields.io/badge/license-MIT-yellowgreen.svg)](#license)
+
 # RUYML
 
 Ruby templating using YAML datasources
