@@ -21,7 +21,7 @@ module Ruyml
 
     # Renders RUYML data using the given template.
     # Rendered data is either written to an optional
-    # output file path or to stdout.
+    # output file path  if provided or as return value.
     def render(template, output = nil)
       result = ERB.new(File.read(template), 0, '-').result(binding)
       if !output.nil?
@@ -30,6 +30,7 @@ module Ruyml
         end
       else
         puts result
+        result
       end
     end
 
