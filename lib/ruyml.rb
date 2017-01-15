@@ -22,21 +22,36 @@ module Ruyml
     # Renders RUYML data using the given template.
     # Rendered data is either written to an optional
     # output file path or to stdout.
-    def render(template, output = nil)
-      result = ERB.new(File.read(template), 0, '-').result(binding)
+    def render_file(template, output = nil)
+      result = render(template)
       if !output.nil?
-        File.open(output, "w") do |file|
+        File.open(output, 'w') do |file|
           file.write(result)
         end
       else
         puts result
+        result
       end
+    end
+
+    # Renders RUYML data using the given template.
+    # Rendered data is return as string.
+    def render_string(template)
+      render(template)
+    end
+
+    private
+
+    # Renders RUYML data using the given template.
+    # Rendered data is either written to an optional
+    # output file path or to stdout.
+    def render(template)
+      ERB.new(File.read(template), 0, '-').result(binding)
     end
 
     # Access Hash class methods. If a YAML propertie
     # matches the method name, then the target method
     # is called if a '!' terminates the method name.
-    private
     def method_missing(name, *args, &block)
       method = name.to_s
       if method =~ /.+!$/ && self.respond_to?(method.chop)

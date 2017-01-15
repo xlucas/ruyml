@@ -45,4 +45,4 @@ options.datasources.each do |datasource|
   data.merge!(YAML.load(File.read(datasource)))
 end
 
-Ruyml::Data.new(data).render(options.template, options.output)
+Ruyml::Data.new(data).render_file(options.template, options.output)
