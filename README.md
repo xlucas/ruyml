@@ -16,7 +16,10 @@ Ruby templating using YAML datasources
 
   content = YAML.load(File.read("file.yml"))
   r = Ruyml::Data.new(content)
-  r.render("template.erb", "output.txt")
+  r.render_file("template.erb", "output.txt")
+  
+  # Or retrieve it as string and do something with it
+  parsed = r.render_string('template.erb')
 ```
 
 ## CLI
