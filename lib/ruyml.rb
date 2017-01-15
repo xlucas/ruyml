@@ -30,6 +30,7 @@ module Ruyml
         end
       else
         puts result
+        result
       end
     end
 
